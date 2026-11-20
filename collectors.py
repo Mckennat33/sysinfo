@@ -1,8 +1,4 @@
-# Gathers information
-# Get CPU, RAM, Drive information 
-# Device name, Processor, Intalled Ram, Device ID, Product ID, System Type, Pen and Touch?? // Need to look at psutil 
-# Put info in dictionary and pass to main -> reporter. 
-# Comp: collector / User: reporter
+# Device ID, User Info
 
 import psutil
 
@@ -28,7 +24,7 @@ def get_cpu_info():
     return cpu_info
 
 
-# get_cpu_info()
+get_cpu_info()
 
 def get_ram_info():
     ram_memory = psutil.virtual_memory()    
@@ -48,5 +44,5 @@ def get_ram_info():
     }
 
 
-    print(ram_info)
+    return ram_info
 get_ram_info()

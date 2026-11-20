@@ -6,17 +6,27 @@
 
 import psutil
 
+cpu_time = psutil.cpu_times(percpu=False)
+mult_cpu_time = psutil.cpu_times(percpu=True)
+cpu_percent = psutil.cpu_percent(interval=1,percpu=False)
+cpu_times_percent = psutil.cpu_times_percent()
+cpu_count = psutil.cpu_count()
+cpu_frequency = psutil.cpu_freq()
+cpu_stats = psutil.cpu_stats()
 
 def get_os_info():
-    print("Getting OS Information")
-    print("CPU Times Per CPU", psutil.cpu_times(percpu=False))
-    print("CPU Times Each Core", psutil.cpu_times(percpu=True))
-    print("CPU Times Percentage", psutil.cpu_times_percent())
-    print("CPU Count", psutil.cpu_count())
-    print("CPU Frequency", psutil.cpu_freq())
-    print("CPU Stats" ,psutil.cpu_stats())
-
+    cpu_info = {
+        'CPU Time': cpu_time, 
+        'CPU Time Per Core': mult_cpu_time, 
+        'CPU Percent': cpu_percent, 
+        'CPU Times Percentage': cpu_times_percent, 
+        'CPU Count': cpu_count, 
+        'CPU Frequency': cpu_frequency, 
+        'CPU Stats': cpu_stats,  
+    }
     
+    for name, info in cpu_info.items():
+        print(name, info)
 
 get_os_info()
 

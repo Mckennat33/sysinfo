@@ -6,15 +6,15 @@
 
 import psutil
 
-cpu_time = psutil.cpu_times(percpu=False)
-mult_cpu_time = psutil.cpu_times(percpu=True)
-cpu_percent = psutil.cpu_percent(interval=1,percpu=False)
-cpu_times_percent = psutil.cpu_times_percent()
-cpu_count = psutil.cpu_count()
-cpu_frequency = psutil.cpu_freq()
-cpu_stats = psutil.cpu_stats()
+def get_cpu_info():
+    cpu_time = psutil.cpu_times(percpu=False)
+    mult_cpu_time = psutil.cpu_times(percpu=True)
+    cpu_percent = psutil.cpu_percent(interval=1,percpu=False)
+    cpu_times_percent = psutil.cpu_times_percent()
+    cpu_count = psutil.cpu_count()
+    cpu_frequency = psutil.cpu_freq()
+    cpu_stats = psutil.cpu_stats()
 
-def get_os_info():
     cpu_info = {
         'CPU Time': cpu_time, 
         'CPU Time Per Core': mult_cpu_time, 
@@ -22,21 +22,9 @@ def get_os_info():
         'CPU Times Percentage': cpu_times_percent, 
         'CPU Count': cpu_count, 
         'CPU Frequency': cpu_frequency, 
-        'CPU Stats': cpu_stats,  
+        'CPU Stats': cpu_stats,
     }
-    
-    for name, info in cpu_info.items():
-        print(name, info)
 
-get_os_info()
+    return cpu_info
 
-
-
-# psutil.cpu_times()
-# scputimes(user=3961.46, system=2150.65, idle=16900.54, nice=169.72, iowait=629.59, ...)
-# psutil.cpu_percent(interval=1)
-# 4.0
-# psutil.cpu_count(logical=False)
-# 2
-# psutil.cpu_freq()
-# scpufreq(current=931.42, min=800.0, max=3500.0)
+print(get_cpu_info())

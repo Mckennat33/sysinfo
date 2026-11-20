@@ -1,0 +1,25 @@
+# create .gitignore -> before any secret or private files exist
+# virtual environment
+.venv/ 
+
+
+# secrets 
+.env
+
+
+
+#Python junk  (click into these )
+__pycache__/
+*.pyc 
+
+#OS / editor junk
+.DS_Store
+.vscode/ 
+
+#generated reports
+#(keep the folder, not the output) 
+reports/*.txt
+
+
+notes.md
+notes-one.md

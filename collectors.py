@@ -27,22 +27,34 @@ def get_cpu_info():
 get_cpu_info()
 
 def get_ram_info():
-    ram_memory = psutil.virtual_memory()    
+    
+    ram_memory = psutil.virtual_memory()  # same as physical
     ram_swap = psutil.swap_memory()
-    disk_par = psutil.disk_partitions(all=False)
-    disk_usage = psutil.disk_usage('/')
-    disk_io_counter = psutil.disk_io_counters()
-    # net_connect = psutil.net_connections(kind: str = 'inet')
+    
 
-    ram_info = {
-        "Ram Memory": ram_memory, 
+    ram_info = { 
+        "Ram Memory": ram_memory, # total, available percent
         "Ram Swap": ram_swap, 
-        "Disk Partitions": disk_par, 
-        "Disk Usage": disk_usage, 
-        "Disk IO Counter": disk_io_counter, 
-        # "Net Connection": net_connect, 
+
     }
 
 
     return ram_info
 get_ram_info()
+
+
+def get_disk_info():
+    disk_par = psutil.disk_partitions(all=False)
+    disk_usage = psutil.disk_usage('/')
+    disk_io_counter = psutil.disk_io_counters()
+    
+    disk_info = {
+        "Disk Parition": disk_par, 
+        "Disk Usage": disk_usage, 
+        "Disk IO Counter": disk_io_counter, 
+    }
+
+    return disk_info
+
+get_disk_info()
+

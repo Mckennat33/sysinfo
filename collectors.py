@@ -20,18 +20,15 @@ def os_info():
         "Processor": processor, 
         "Version": version, 
         "Release": release, 
-        "Sytem": system, 
-        "Invalidate Cache": invalidate_cache,
+        "System": system, 
     }
 
     mac_os_info = {
         "Mac Info": mac_os
     }
 
-    
     return os_cross_info, mac_os_info
 
-os_info()
 
 def get_cpu_info():
     cpu_time = psutil.cpu_times(percpu=False)
@@ -55,8 +52,6 @@ def get_cpu_info():
     return cpu_info
 
 
-get_cpu_info()
-
 
 
 def get_ram_info():
@@ -73,7 +68,7 @@ def get_ram_info():
 
 
     return ram_info
-get_ram_info()
+
 
 
 def get_disk_info():
@@ -82,12 +77,22 @@ def get_disk_info():
     disk_io_counter = psutil.disk_io_counters()
     
     disk_info = {
-        "Disk Parition": disk_par, 
+        "Disk Partition": disk_par, 
         "Disk Usage": disk_usage, 
         "Disk IO Counter": disk_io_counter, 
     }
 
     return disk_info
 
-get_disk_info()
+
+
+
+def collect_all():
+    
+    return {
+        "OS": os_info(),
+        "CPU": get_cpu_info(),
+        "Disk": get_disk_info(),
+        "Ram": get_ram_info(),
+    }
 

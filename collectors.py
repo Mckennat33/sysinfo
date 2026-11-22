@@ -1,6 +1,7 @@
-import psutil
 import platform
-
+import psutil
+import datetime
+import time
 
 def os_info():
     # CROSS PLATFORM
@@ -52,8 +53,6 @@ def get_cpu_info():
     return cpu_info
 
 
-
-
 def get_ram_info():
     
     ram_memory = psutil.virtual_memory()
@@ -86,6 +85,36 @@ def get_disk_info():
 
 
 
+def get_network():
+
+    in_out = psutil.net_io_counters()
+    net_address = psutil.net_if_addrs()
+
+    network = {
+        "Input/Output": in_out, 
+        "Interface Card Info": net_address,
+    }
+
+    return network
+
+
+def get_uptime():
+    boot_time = psutil.boot_time()
+    users = psutil.users()
+    t = time.time()
+    time_stamp = datetime.date.fromtimestamp(boot_time)
+
+    uptime = {
+        "Boot Time": boot_time, # need to get from time booted / logic
+        "Users": users, 
+        "Time Stamp": time_stamp
+    }
+
+    
+    return uptime
+
+
+
 
 def collect_all():
     
@@ -94,5 +123,7 @@ def collect_all():
         "CPU": get_cpu_info(),
         "Disk": get_disk_info(),
         "Ram": get_ram_info(),
+        "Network": get_network(),
+        "Uptime": get_uptime(),
     }
 

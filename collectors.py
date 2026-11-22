@@ -22,7 +22,7 @@ def os_info():
         "Version": version, 
         "Release": release, 
         "System": system, 
-        "Mac Info": mac_os
+        "Mac Info": mac_os # add logic for what OS
     }
 
 

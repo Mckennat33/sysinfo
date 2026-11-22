@@ -5,8 +5,8 @@ import report
 def mainfunc(): 
     # passing info to report as an argument
     information = collectors.collect_all()
-    data = report.format_report(information)
-    return data
+    system_info = report.format_report(information)
+    return system_info
 
 
 mainfunc()

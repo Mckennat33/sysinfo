@@ -1,8 +1,7 @@
 # Formats Information (Report). Saves report -> output/reports
-# import main
 
-def format_report(data):
-    print(data)
+def format_report(sys_info):
+    return sys_info
 
 
 

@@ -22,13 +22,11 @@ def os_info():
         "Version": version, 
         "Release": release, 
         "System": system, 
-    }
-
-    mac_os_info = {
         "Mac Info": mac_os
     }
 
-    return os_cross_info, mac_os_info
+
+    return os_cross_info
 
 
 def get_cpu_info():

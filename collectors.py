@@ -1,6 +1,16 @@
 # Device ID, User Info
 
 import psutil
+import platform
+
+def os_info():
+    os_machine_arc = platform.machine()
+    node_net_name = platform.node()
+    
+
+    print(os_machine_arc)
+
+os_info()
 
 def get_cpu_info():
     cpu_time = psutil.cpu_times(percpu=False)
@@ -12,7 +22,7 @@ def get_cpu_info():
     cpu_stats = psutil.cpu_stats()
 
     cpu_info = {
-        'CPU Time': cpu_time, 
+        'CPU Time': cpu_time, # idle time
         'CPU Time Per Core': mult_cpu_time, 
         'CPU Percent': cpu_percent, 
         'CPU Times Percentage': cpu_times_percent, 
@@ -25,6 +35,8 @@ def get_cpu_info():
 
 
 get_cpu_info()
+
+
 
 def get_ram_info():
     

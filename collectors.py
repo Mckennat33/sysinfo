@@ -1,14 +1,35 @@
-# Device ID, User Info
-
 import psutil
 import platform
 
 def os_info():
+
+    # CROSS PLATFORM
     os_machine_arc = platform.machine()
     node_net_name = platform.node()
-    
+    processor = platform.processor()
+    version = platform.version()
+    release = platform.release()
+    system = platform.system()
+    invalidate_cache = platform.invalidate_caches()
+    # MAC OS. 
+    mac_os = platform.mac_ver(release='', versioninfo=('', '', ''), machine='')
 
-    print(os_machine_arc)
+    os_cross_info = {
+        "OS Architecture": os_machine_arc, 
+        "Computer Name": node_net_name, 
+        "Processor": processor, 
+        "Version": version, 
+        "Release": release, 
+        "Sytem": system, 
+        "Invalidate Cache": invalidate_cache,
+    }
+
+    mac_os_info = {
+        "Mac Info": mac_os
+    }
+
+    
+    print(mac_os)
 
 os_info()
 
@@ -22,7 +43,7 @@ def get_cpu_info():
     cpu_stats = psutil.cpu_stats()
 
     cpu_info = {
-        'CPU Time': cpu_time, # idle time
+        'CPU Time': cpu_time,
         'CPU Time Per Core': mult_cpu_time, 
         'CPU Percent': cpu_percent, 
         'CPU Times Percentage': cpu_times_percent, 
@@ -40,12 +61,12 @@ get_cpu_info()
 
 def get_ram_info():
     
-    ram_memory = psutil.virtual_memory()  # same as physical
+    ram_memory = psutil.virtual_memory()
     ram_swap = psutil.swap_memory()
     
 
     ram_info = { 
-        "Ram Memory": ram_memory, # total, available percent
+        "Ram Memory": ram_memory,
         "Ram Swap": ram_swap, 
 
     }

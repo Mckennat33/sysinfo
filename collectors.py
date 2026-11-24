@@ -15,6 +15,8 @@ def os_info():
     # MAC OS. 
     mac_os = platform.mac_ver(release="", versioninfo=("", "", ""), machine="")
 
+
+
     os_cross_info = {
         "OS Architecture": os_machine_arc, 
         "Computer Name": node_net_name, 
@@ -54,8 +56,9 @@ def get_cpu_info():
 def get_ram_info():
     
     ram_memory = psutil.virtual_memory()
+    percent = ram_memory.percent
     ram_swap = psutil.swap_memory()
-    
+    print(percent) # Ram percent being used. Need to take out decimal and add percent.
 
     ram_info = { 
         "Ram Memory": ram_memory,
@@ -64,9 +67,10 @@ def get_ram_info():
     }
 
 
+
     return ram_info
 
-
+get_ram_info()
 
 def get_disk_info():
     disk_par = psutil.disk_partitions(all=False)

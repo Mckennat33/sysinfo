@@ -5,14 +5,14 @@ import time
 import psutil
 
 
+system = platform.system()
 def os_info():
     # CROSS PLATFORM
+    version = platform.version()
     os_machine_arc = platform.machine()
     node_net_name = platform.node()
     processor = platform.processor()
-    version = platform.version()
     release = platform.release()
-    system = platform.system()
     invalidate_cache = platform.invalidate_caches()
     # MAC OS. 
     mac_os = platform.mac_ver(release="", versioninfo=("", "", ""), machine="")
@@ -56,14 +56,21 @@ def get_cpu_info():
 
 
 def get_ram_info():
-    
-    ram_memory = psutil.virtual_memory()
-    total_memory = f"{round(ram_memory.total / (1024.0 ** 3), 2)} GB"
-    available_memory = f"{round(ram_memory.available / (1024 ** 3), 2) }GB"
-    used_memory = f"{round(ram_memory.available / (1024 ** 3), 2)} GB"
+    if system == "Mac OS":
+        print("Darwin")
+        ram_memory = psutil.virtual_memory()
+        total_memory = f"{round(ram_memory.total / (1024.0 ** 3), 2)} GB"
+        available_memory = f"{round(ram_memory.available / (1024 ** 3), 2) }GB"
+        used_memory = f"{round(ram_memory.available / (1024 ** 3), 2)} GB"
+    else:
+        print("Windows")
+        ram_memory = psutil.virtual_memory()
+        total_memory = f"{round(ram_memory.total / (1024.0 ** 3), 2)} GB"
+        available_memory = f"{round(ram_memory.available / (1024 ** 3), 2) }GB"
+        used_memory = f"{round(ram_memory.available / (1024 ** 3), 2)} GB"
     
 
-    print(total_memory, available_memory, used_memory)
+    # print(total_memory, available_memory, used_memory)
     # print(total_memory, available_memory, used_memory) # Ram percent being used. Need to take out decimal and add percent.
     
     

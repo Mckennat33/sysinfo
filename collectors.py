@@ -58,12 +58,13 @@ def get_cpu_info():
 def get_ram_info():
     
     ram_memory = psutil.virtual_memory()
-    total_memory = round(ram_memory.total / (1024.0 ** 3), 2)
-    available_memory = round(ram_memory.available / (1024 ** 3), 2)
-    used_memory = round(ram_memory.available / (1024 ** 3), 2)
+    total_memory = f"{round(ram_memory.total / (1024.0 ** 3), 2)} GB"
+    available_memory = f"{round(ram_memory.available / (1024 ** 3), 2) }GB"
+    used_memory = f"{round(ram_memory.available / (1024 ** 3), 2)} GB"
     
 
-    print(total_memory, available_memory, used_memory) # Ram percent being used. Need to take out decimal and add percent.
+    print(total_memory, available_memory, used_memory)
+    # print(total_memory, available_memory, used_memory) # Ram percent being used. Need to take out decimal and add percent.
     
     
     ram_swap = psutil.swap_memory()
@@ -72,12 +73,14 @@ def get_ram_info():
 
 
     ram_info = { 
-        "Ram Memory": ram_memory,
+        "Total RAM": total_memory,
+        "Available RAM": available_memory,
+        "Used RAM": used_memory,
         "Ram Swap": ram_swap, 
 
     }
 
-    return ram_info
+    # print(ram_info)
 
 get_ram_info()
 

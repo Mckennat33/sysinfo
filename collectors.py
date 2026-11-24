@@ -1,7 +1,9 @@
-import platform
-import psutil
 import datetime
+import platform
 import time
+
+import psutil
+
 
 def os_info():
     # CROSS PLATFORM
@@ -56,17 +58,24 @@ def get_cpu_info():
 def get_ram_info():
     
     ram_memory = psutil.virtual_memory()
-    percent = ram_memory.percent
+    total_memory = round(ram_memory.total / (1024.0 ** 3), 2)
+    available_memory = round(ram_memory.available / (1024 ** 3), 2)
+    used_memory = round(ram_memory.available / (1024 ** 3), 2)
+    
+
+    print(total_memory, available_memory, used_memory) # Ram percent being used. Need to take out decimal and add percent.
+    
+    
     ram_swap = psutil.swap_memory()
-    print(percent) # Ram percent being used. Need to take out decimal and add percent.
+    
+
+
 
     ram_info = { 
         "Ram Memory": ram_memory,
         "Ram Swap": ram_swap, 
 
     }
-
-
 
     return ram_info
 

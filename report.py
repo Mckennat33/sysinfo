@@ -11,7 +11,7 @@ def format_report(sys_info):
     for key, values in user_os.items():
         
         print(f"Key {key}, Value {values}")
-
+    
 def save_report():
     print("Save Report")
 

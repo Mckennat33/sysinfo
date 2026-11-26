@@ -1,23 +1,20 @@
 import datetime
 import platform
 import time
-
+from datetime import datetime
 import psutil
 
 
 system = platform.system()
 def os_info():
-    # CROSS PLATFORM
-    version = platform.version()
     os_machine_arc = platform.machine()
     node_net_name = platform.node()
     processor = platform.processor()
+    version = platform.version()
+    mac = platform.mac_ver()
     release = platform.release()
-    invalidate_cache = platform.invalidate_caches()
-    # MAC OS. 
-    mac_os = platform.mac_ver(release="", versioninfo=("", "", ""), machine="")
-
-
+    mac_os = platform.mac_ver(release="", versioninfo=("", "", ""), machine="") #tuplet
+    print(mac)
 
     os_cross_info = {
         "OS Architecture": os_machine_arc, 
@@ -28,8 +25,7 @@ def os_info():
         "System": system, 
         "Mac Info": mac_os # add logic for what OS
     }
-
-
+    
     return os_cross_info
 
 
@@ -57,28 +53,21 @@ def get_cpu_info():
 
 def get_ram_info():
     if system == "Mac OS":
-        print("Darwin")
+        # print("Darwin")
         ram_memory = psutil.virtual_memory()
         total_memory = f"{round(ram_memory.total / (1024.0 ** 3), 2)} GB"
         available_memory = f"{round(ram_memory.available / (1024 ** 3), 2) }GB"
         used_memory = f"{round(ram_memory.available / (1024 ** 3), 2)} GB"
     else:
-        print("Windows")
+        # print("Windows")
         ram_memory = psutil.virtual_memory()
         total_memory = f"{round(ram_memory.total / (1024.0 ** 3), 2)} GB"
         available_memory = f"{round(ram_memory.available / (1024 ** 3), 2) }GB"
         used_memory = f"{round(ram_memory.available / (1024 ** 3), 2)} GB"
     
-
-    # print(total_memory, available_memory, used_memory)
-    # print(total_memory, available_memory, used_memory) # Ram percent being used. Need to take out decimal and add percent.
-    
     
     ram_swap = psutil.swap_memory()
     
-
-
-
     ram_info = { 
         "Total RAM": total_memory,
         "Available RAM": available_memory,
@@ -88,8 +77,8 @@ def get_ram_info():
     }
 
     # print(ram_info)
-
-get_ram_info()
+    return ram_info
+# get_ram_info()
 
 def get_disk_info():
     disk_par = psutil.disk_partitions(all=False)
@@ -120,21 +109,37 @@ def get_network():
 
 
 def get_uptime():
-    boot_time = psutil.boot_time()
     users = psutil.users()
+    user = users[0][0]
     t = time.time()
-    time_stamp = datetime.date.fromtimestamp(boot_time)
-
+    boot_timestamp = psutil.boot_time()
+    # print(type(users))
+    # print(*users, sep='')
+    # Format the boot date and time
+    boot_date = datetime.fromtimestamp(boot_timestamp).strftime("%Y-%m-%d %H:%M:%S")
+    print(users[0][0])
     uptime = {
-        "Boot Time": boot_time, # need to get from time booted / logic
-        "Users": users, 
-        "Time Stamp": time_stamp
+        "User": user,
+        # "Boot Time": boot_date, # need to get from time booted / logic
+        # "Users": users, 
+        # "Time Stamp": boot_timestamp
     }
 
+
+    uptime_seconds = int(time.time() - psutil.boot_time())
     
-    return uptime
+    days, remainder = divmod(uptime_seconds, 86400)
+    hours, remainder = divmod(remainder, 3600)
+    minutes, seconds = divmod(remainder, 60)
+    
+    print(f"{days}d {hours}h {minutes}m {seconds}s") 
 
+    
+    print(uptime)
 
+get_uptime()
+
+# os_info()
 
 
 def collect_all():
